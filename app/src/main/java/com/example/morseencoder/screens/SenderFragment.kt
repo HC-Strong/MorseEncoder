@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import com.example.morseencoder.FlashlightHandler
 import com.example.morseencoder.R
 import com.example.morseencoder.databinding.FragmentSenderBinding
 import timber.log.Timber
@@ -31,7 +32,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class SenderFragment : Fragment() {
-    private var flashLightOn = false
+
+    private lateinit var flashlightHandler: FlashlightHandler
 
     private lateinit var binding : FragmentSenderBinding
 
@@ -46,6 +48,8 @@ class SenderFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        flashlightHandler = FlashlightHandler(context)
     }
 
     override fun onCreateView(
@@ -119,32 +123,9 @@ class SenderFragment : Fragment() {
             }
     }
 
-    private fun cameraAvailable(context : Context) : Boolean {
-        return context.getPackageManager().hasSystemFeature(PackageManager.FEATURE_CAMERA_FLASH)
-    }
-
-    private fun getCameraId(cameraManager: CameraManager) : String {
-        // how does as CameraManager differ from : CameraManger?
-        return cameraManager.cameraIdList[0]
-    }
-
-    private fun toggleFlashlight(view: View?, context: Context?) {
-        Timber.v("logging view here to suppress warnings: $view")
-        val cameraManager = context?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
-        if (!flashLightOn) {
-            Timber.i("flashLightOn is $flashLightOn")
-            cameraManager.setTorchMode(getCameraId(cameraManager), true)
-            flashLightOn = true
-        } else {
-            Timber.i("flashLightOn is $flashLightOn")
-            cameraManager.setTorchMode(getCameraId(cameraManager), false)
-            flashLightOn = false
-        }
-    }
-
     override fun onResume() {
         super.onResume()
-        toggleFlashlight(view, context)
+        flashlightHandler.setFlashlightState(view, turnOn = true)
         Timber.i("flashlight turning on")
     }
 
@@ -152,7 +133,7 @@ class SenderFragment : Fragment() {
     // still needs to turn off the camera though
     override fun onPause() {
         super.onPause()
-        toggleFlashlight(view, context)
+        flashlightHandler.setFlashlightState(view, turnOn = false)
         Timber.i("flashlight turning off")
     }
 }
