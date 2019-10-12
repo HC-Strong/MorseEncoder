@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">MorseEncoder</string>
+
+    <string name="encoderScreenTitle">Encoder</string>
+    <string name="sentScreenTitle">Message Sent</string>
+    <string name="senderScreenTitle">Sending…</string>
+    <string name="send_message">send message</string>
+    <string name="finish_sending">Finish Sending</string>
+    <string name="send_another_message">Send Another Message</string>
 </resources>
