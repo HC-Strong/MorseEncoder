@@ -8,8 +8,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.morseencoder.R
 import com.example.morseencoder.databinding.FragmentSenderBinding
+import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,6 +50,11 @@ class SenderFragment : Fragment() {
         // Inflate the layout for this fragment using the data binding utility,
         // then return the root of the binding as the view
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sender, container, false)
+
+        binding.tempFinishSendingBtn.setOnClickListener {view : View ->
+            view.findNavController().navigate(R.id.action_senderFragment_to_sentFragment)
+            Timber.i("temp finish sending button clicked")
+        }
         return binding.root
     }
 
