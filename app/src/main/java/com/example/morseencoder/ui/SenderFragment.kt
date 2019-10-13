@@ -128,7 +128,9 @@ class SenderFragment : Fragment() {
         Timber.i("flashlight turning on")
 
         // SEND MESSAGE
-        morseCodeHandler.encodeString(secretMessage)
+        var messageToSend = morseCodeHandler.encodeString(secretMessage)
+        flashlightHandler.sendMessage(view, messageToSend)
+
     }
 
     //should eventually pause or end message sending here, not just turn off camera
