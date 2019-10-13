@@ -6,21 +6,26 @@ import java.util.*
 
 class MorseCodeHandler {
 
-    fun encodeString(message : String) : MutableList<Map<Char, List<Beep>?>> { // Yes, it's a list of maps of chars to  lists of beeps
-        //TODO: I'm not sure having a list of maps of Chars to Lists of Beeps is the best way to go here... Maybe I can make a class for this
+    fun encodeString(message : String) : Map<Char, List<Beep>?> {
+        //TODO: better than it was, but I still might be able to clean up the code if I make a class for the return type list
         val charArray = message.toCharArray()
         Timber.i("The message is $message")
         //val beepList = listOf<Beep>()
-        val beepList: MutableList<Map<Char, List<Beep>?>> = arrayListOf()
-        var toAdd : Map<Char, List<Beep>>
+        val beepList: MutableMap<Char, List<Beep>?> = mutableMapOf()
+        //var toAdd : Map.Entry<Char, List<Beep>>
+
+        var newKey : Char
+        var newValue : List<Beep>?
 
         for (char in charArray) {
             Timber.i("Current letter is $char")
 
-
-            toAdd = MorseCode.MorseCharacters.filter { it.key == char.toUpperCase() }
-            beepList.add(toAdd)
-            Timber.i(MorseCode.MorseCharacters.get(char.toUpperCase()).toString())
+            //var test = MorseCode.MorseCharacters.filter { it.key == char.toUpperCase() }
+            newKey = char.toUpperCase()
+            newValue  = MorseCode.MorseCharacters.get(newKey)
+            //beepList.add(toAdd)
+            beepList.put(newKey, newValue)
+            Timber.i(beepList.size.toString())
         }
 
 
@@ -31,11 +36,9 @@ class MorseCodeHandler {
         val timer = Timer()
 
 
-        for (charMap in beepList) {
-            for ( beepSet in charMap) {
-                val task = testTimerTask(beepSet.value.toString())
+        for (entry in beepList) {
+                val task = testTimerTask(entry.value.toString())
                 timer.schedule(task, 300)
-            }
         }
         Timber.i("After processing, the list is $beepList")
 
