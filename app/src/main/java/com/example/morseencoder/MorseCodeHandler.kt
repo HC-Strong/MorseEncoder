@@ -1,6 +1,8 @@
 package com.example.morseencoder
 
+import android.content.Context
 import timber.log.Timber
+import java.util.*
 
 class MorseCodeHandler {
 
@@ -22,13 +24,49 @@ class MorseCodeHandler {
         }
 
 
+        Timber.i("The list is currently: $beepList")
+
+
+        // TODO: this is sending, it should be separate from encoding!!!
+        val timer = Timer()
+
+
+        for (charMap in beepList) {
+            for ( beepSet in charMap) {
+                val task = testTimerTask(beepSet.value.toString())
+                timer.schedule(task, 300)
+            }
+        }
         Timber.i("After processing, the list is $beepList")
+
         return beepList
     }
 
+    fun transmitMessage(message: MutableList<Map<Char, List<Beep>?>>) {
+
+    }
+
+    fun holdFor(millisToWait : Int) {
+
+    }
+
+/*    inline fun Timer.schedule(
+        delay: Long,
+        crossinline action: TimerTask.() -> Unit
+    ): TimerTask {
+        return testTimerTask()
+    }*/
+
     // gonna also need
-    // encode char to loop over string
     // send message that I'd like to be able to be called like
     // encodeString("this is my message").sendMessage()
     // which I think I need to like extend something somehow. Extend the list class? The beeps?
+}
+
+class testTimerTask(val string: String) : TimerTask() {
+    override fun run() {
+        Timber.i("Tick Tock: $string")
+
+    }
+
 }
