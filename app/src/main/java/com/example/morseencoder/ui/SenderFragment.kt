@@ -1,19 +1,16 @@
-package com.example.morseencoder.screens
+package com.example.morseencoder.ui
 
 import android.content.Context
-import android.content.pm.PackageManager
-import android.hardware.camera2.CameraManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.morseencoder.FlashlightHandler
+import com.example.morseencoder.MorseCodeHandler
 import com.example.morseencoder.R
 import com.example.morseencoder.databinding.FragmentSenderBinding
 import timber.log.Timber
@@ -33,7 +30,9 @@ private const val ARG_PARAM2 = "param2"
  */
 class SenderFragment : Fragment() {
 
+    private var secretMessage = "hi" // TODO: get actual msg via intent extra or whatever works with frags
     private lateinit var flashlightHandler: FlashlightHandler
+    private val morseCodeHandler = MorseCodeHandler()
 
     private lateinit var binding : FragmentSenderBinding
 
@@ -127,6 +126,9 @@ class SenderFragment : Fragment() {
         super.onResume()
         flashlightHandler.setFlashlightState(view, turnOn = true)
         Timber.i("flashlight turning on")
+
+        // SEND MESSAGE
+        morseCodeHandler.encodeString(secretMessage)
     }
 
     //should eventually pause or end message sending here, not just turn off camera

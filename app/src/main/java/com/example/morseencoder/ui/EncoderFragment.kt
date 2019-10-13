@@ -1,4 +1,4 @@
-package com.example.morseencoder.screens
+package com.example.morseencoder.ui
 
 import android.content.Context
 import android.net.Uri
@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.morseencoder.R
-import com.example.morseencoder.databinding.FragmentSentBinding
+import com.example.morseencoder.databinding.FragmentEncoderBinding
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -21,14 +21,13 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [SentFragment.OnFragmentInteractionListener] interface
+ * [EncoderFragment.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [SentFragment.newInstance] factory method to
+ * Use the [EncoderFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SentFragment : Fragment() {
-
-    private lateinit var binding : FragmentSentBinding
+class EncoderFragment : Fragment() {
+    private lateinit var binding: FragmentEncoderBinding
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -49,11 +48,11 @@ class SentFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment using the data binding utility,
         // then return the root of the binding as the view
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sent, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_encoder, container, false)
 
-        binding.restartBtn.setOnClickListener {view : View ->
-            view.findNavController().navigate(R.id.action_sentFragment_to_encoderFragment)
-            Timber.i("reestart button clicked")
+        binding.sendMsgBtn.setOnClickListener {view : View ->
+            view.findNavController().navigate(R.id.action_encoderFragment_to_senderFragment)
+            Timber.i("send message button clicked")
         }
 
         return binding.root
@@ -101,12 +100,12 @@ class SentFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SentFragment.
+         * @return A new instance of fragment EncoderFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SentFragment().apply {
+            EncoderFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

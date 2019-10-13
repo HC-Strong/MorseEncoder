@@ -1,11 +1,9 @@
-package com.example.morseencoder
+package com.example.morseencoder.ui
 
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.morseencoder.screens.EncoderFragment
-import com.example.morseencoder.screens.SenderFragment
-import com.example.morseencoder.screens.SentFragment
+import com.example.morseencoder.R
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity(),

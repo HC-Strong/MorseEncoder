@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/encoderFragment"
-        android:name="com.example.morseencoder.screens.EncoderFragment"
+        android:name="com.example.morseencoder.ui.EncoderFragment"
         android:label="fragment_encoder"
         tools:layout="@layout/fragment_encoder" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/senderFragment"
-        android:name="com.example.morseencoder.screens.SenderFragment"
+        android:name="com.example.morseencoder.ui.SenderFragment"
         android:label="fragment_sender"
         tools:layout="@layout/fragment_sender" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/sentFragment"
-        android:name="com.example.morseencoder.screens.SentFragment"
+        android:name="com.example.morseencoder.ui.SentFragment"
         android:label="fragment_sent"
         tools:layout="@layout/fragment_sent" >
         <action
