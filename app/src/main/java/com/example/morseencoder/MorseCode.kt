@@ -1,16 +1,14 @@
 package com.example.morseencoder
 
-import com.example.morseencoder.MorseCode.timeUnit
-
 object MorseCode {
     val MorseCharacters = mapOf(
-        'A' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DASH, Beep.CHAR_PAUSE),
-        'H' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_PAUSE),
-        'I' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_PAUSE),
-        '|' to listOf(Beep.CHAR_END),
+        'A' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DASH, Beep.CHAR_END),
+        'H' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_END),
+        'I' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_END),
+        '|' to listOf(Beep.CHAR_END), //TODO: do I really need this mapping here?
         ' ' to listOf(Beep.SPACE)
     )
-    const val timeUnit = 333
+    const val timeUnit = 335 // TODO: either clean this up or actually use it somewhere. currently setting the interval in the timer but should eventually be a user-defined setting
 
 /*    fun make(char: Char) { // put this here envisioning its use for encoding messages one user-entered character at a time: ie MorseCode.make('A')
 
@@ -18,17 +16,17 @@ object MorseCode {
 
     class Letter(val char: Char){
         val code = MorseCharacters.get(char)
-
+        val duration = code?.sumBy { it.duration }
     }
 
 }
 
-enum class Beep(val length: Long, val isOn: Boolean) {
-    DOT(1L * timeUnit, isOn = true),
-    DASH(3L * timeUnit, isOn = true),
-    CHAR_PAUSE(1L * timeUnit, isOn = false),  // TODO: I kinda want to figure out how to just automatically add this, but for now I need to spell it out
-    CHAR_END(2L * timeUnit, isOn = false),  // Note that this is 2 not 3 because each dot or dash will be ended with 1 unit of off
-    SPACE(4L * timeUnit, isOn = false)      // Note that this is 4 instead of 7 because each character ends with 3 units of off
+enum class Beep(val duration: Int, val isOn: Boolean) {
+    DOT(1, isOn = true),
+    DASH(3, isOn = true),
+    CHAR_PAUSE(1, isOn = false),  // TODO: I kinda want to figure out how to just automatically add this, but for now I need to spell it out
+    CHAR_END(3, isOn = false),
+    SPACE(7, isOn = false)
 } // TODO maybe I should have the CHAR_END and SPACE lengths be correct and subtract from them when they're actually sent?
 
 /*  MORSE CODE RESOURCES
