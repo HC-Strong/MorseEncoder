@@ -45,14 +45,14 @@ class FlashlightHandler(context: Context?) {
                 curBeep = curLetter.code!![beepNum] // getting the beepNumth beep in the list of beeps that is the code attrib on the letter class
                 beepCount = curLetter.code!!.count() // TODO: I'm not sure I like having to put all the CHAR_END and CHAR_PAUSE beeps in here to get this to work out right. Kinda want a method for Letter that will return the correct value
                 beepDuration = curBeep.duration
-                Timber.i("BeepDuration is $beepDuration")
-                Timber.i("BeepNum is $beepNum")
+                //Timber.i("BeepDuration is $beepDuration")
+                //Timber.i("BeepNum is $beepNum")
 
-                Timber.i("Tick Tock: Letter $letterNum of ${morseLetters.count()}: ${curLetter.char}")
+                Timber.i("Tick Tock: Sending letter ${letterNum+1} of ${morseLetters.count()}: ${curLetter.char}...")
                 setFlashlightState(curBeep.isOn)
 
                 when {
-                    beepProgress < beepDuration-1   -> {beepProgress++; Timber.i("$beepProgress") }
+                    beepProgress < beepDuration-1   -> {beepProgress++}
                     beepNum < beepCount-1           -> {beepNum++; beepProgress = 0}
                     else                            -> {letterNum++; beepNum = 0}
                 }
@@ -79,11 +79,11 @@ class FlashlightHandler(context: Context?) {
     fun toggleFlashlight(view: View?) {
         Timber.v("logging view here to suppress warnings: $view")
         if (!flashLightOn) {
-            Timber.i("flashLightOn is $flashLightOn (toggle)")
+            //Timber.i("flashLightOn is $flashLightOn (toggle)")
             cameraManager.setTorchMode(cameraId, true)
             flashLightOn = true
         } else {
-            Timber.i("flashLightOn is $flashLightOn (toggle)")
+            //Timber.i("flashLightOn is $flashLightOn (toggle)")
             cameraManager.setTorchMode(cameraId, false)
             flashLightOn = false
         }
@@ -91,11 +91,11 @@ class FlashlightHandler(context: Context?) {
 /// TODO this uses repeated code from the toggle method and should be modified to remove redundancy
     fun setFlashlightState(turnOn: Boolean = true) {
         if (turnOn) {
-            Timber.i("flashLightOn is $flashLightOn")
+            //Timber.i("flashLightOn is $flashLightOn")
             cameraManager.setTorchMode(cameraId, true)
             flashLightOn = true
         } else {
-            Timber.i("flashLightOn is $flashLightOn")
+            //Timber.i("flashLightOn is $flashLightOn")
             cameraManager.setTorchMode(cameraId, false)
             flashLightOn = false
         }

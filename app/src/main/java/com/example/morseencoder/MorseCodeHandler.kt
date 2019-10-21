@@ -15,7 +15,7 @@ class MorseCodeHandler {
             Timber.i("Encoding: $char")
             morseLetters.add(MorseCode.Letter(char))
         }
-        Timber.i("''$message'' has been encoded as ''${morseLetters.toString()}''")
+        Timber.i("\"$message\" has been encoded as \"${morseLetters.map {it.code.toString()}}\"")
 
         return morseLetters
     }
