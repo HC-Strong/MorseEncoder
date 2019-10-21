@@ -3,6 +3,8 @@ package com.example.morseencoder
 import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
+import android.os.CountDownTimer
+import android.util.Log
 import android.view.View
 import timber.log.Timber
 import java.util.*
@@ -13,9 +15,52 @@ class FlashlightHandler(context: Context?) {
     private var cameraId : String = getCameraId(cameraManager)
     private var flashLightOn = false
 
+    private var countDown = 5L
+
     // transmit message by first turning on the light, then for each character/unit (ie pause) waiting
     //the designated amount of time and then setting the state
     fun sendMessage(view: View?, beepList: Map<Char, List<Beep>?>) {
+        setFlashlightState(view, turnOn = true)
+        Timber.i("Tick Tock: Light initial switch on")
+        // TODO: go back and clean up commented out code in MorseCodeHandler
+
+        flashLightTimer(beepList)
+
+
+/*        var timer = Timer()
+        var task : TestTimerTask
+        var firstBeep = true
+
+
+        for (entry in beepList) {
+            Timber.i("The current character is ${entry.key}")
+            for (beep in entry.value!!) {
+                Timber.i("The current beep is $beep")
+                task = TestTimerTask(view, beep.isOn, this)
+                //timer = Timer()
+                timer.schedule(task, 5000)  // TODO: make that 300 be adjustable by user through settings menu
+
+            }
+        }
+        Timber.i("After processing, the list is $beepList")*/
+    }
+
+    private fun flashLightTimer(beepList: Map<Char, List<Beep>?>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
+        val timer = object: CountDownTimer(countDown*1000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                countDown--
+                Timber.i("Tick Tock: $countDown... Beep is: $beepList[countdown]")
+            }
+
+            override fun onFinish() {
+                Timber.i("Tick Tock: time's UP!")}
+        }
+        timer.start()
+    }
+
+
+    // OLD FAILED VERSION OF SEND MESSAGE FUNCTION FOR REF WHILE I WORK ON NEW VERSION!!!
+    fun sendMessageFail(view: View?, beepList: Map<Char, List<Beep>?>) {
         setFlashlightState(view, turnOn = true)
         Timber.i("Tick Tock: Light initial switch on")
         // TODO: go back and clean up commented out code in MorseCodeHandler
@@ -27,7 +72,6 @@ class FlashlightHandler(context: Context?) {
 
         for (entry in beepList) {
             Timber.i("The current character is ${entry.key}")
-
             for (beep in entry.value!!) {
                 Timber.i("The current beep is $beep")
                 task = TestTimerTask(view, beep.isOn, this)
@@ -43,7 +87,6 @@ class FlashlightHandler(context: Context?) {
                     //setFlashlightState(view, turnOn = false)
                     //Timber.i("Tick Tock: Off!")
                 }*/
-
                 //FIRST BEEP DETECTION!!!!!
 //                if(!firstBeep){
 //                    //setFlashlightState(view, turnOn = false)
