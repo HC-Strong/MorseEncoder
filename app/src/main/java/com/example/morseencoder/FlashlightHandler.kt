@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.os.CountDownTimer
 import android.view.View
+import androidx.navigation.findNavController
 import timber.log.Timber
 
 class FlashlightHandler(context: Context?) {
@@ -16,10 +17,10 @@ class FlashlightHandler(context: Context?) {
     fun sendMessage(view: View?,  morseLetters: List<MorseCode.Letter>) {
         Timber.v("logging view here to suppress warnings: $view")
 
-        flashLightTimer(morseLetters)
+        flashLightTimer(view, morseLetters)
     }
 
-    private fun flashLightTimer( morseLetters: List<MorseCode.Letter>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
+    private fun flashLightTimer( view: View?, morseLetters: List<MorseCode.Letter>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
         val interval = 333L     // TODO: make that countDownInterval be adjustable by user through settings menu
 
         var letterNum = 0
@@ -58,7 +59,9 @@ class FlashlightHandler(context: Context?) {
             }
 
             override fun onFinish() {
-                Timber.i("Tick Tock: Message Sent!")}
+                Timber.i("Tick Tock: Message Sent!")
+                view?.findNavController()?.navigate(R.id.action_senderFragment_to_sentFragment)
+            }
         }
         timer.start()
     }
