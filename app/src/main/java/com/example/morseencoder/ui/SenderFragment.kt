@@ -124,11 +124,12 @@ class SenderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        flashlightHandler.setFlashlightState(view, turnOn = true)
+        //flashlightHandler.setFlashlightState(view, turnOn = true)
+        flashlightHandler.setFlashlightState(turnOn = true)
         Timber.i("flashlight turning on")
 
         // SEND MESSAGE
-        var messageToSend = morseCodeHandler.encodeString(secretMessage)
+        val messageToSend = morseCodeHandler.encodeString(secretMessage)
         flashlightHandler.sendMessage(view, messageToSend)
 
     }
@@ -137,7 +138,8 @@ class SenderFragment : Fragment() {
     // still needs to turn off the camera though
     override fun onPause() {
         super.onPause()
-        flashlightHandler.setFlashlightState(view, turnOn = false)
+        //flashlightHandler.setFlashlightState(view, turnOn = false)
+        flashlightHandler.setFlashlightState(turnOn = false)
         Timber.i("flashlight turning off")
     }
 }

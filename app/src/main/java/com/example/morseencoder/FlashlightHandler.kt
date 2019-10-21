@@ -4,122 +4,52 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.hardware.camera2.CameraManager
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.View
 import timber.log.Timber
-import java.util.*
-import java.util.logging.Handler
 
 class FlashlightHandler(context: Context?) {
     private var cameraManager = context?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private var cameraId : String = getCameraId(cameraManager)
     private var flashLightOn = false
 
-    private var countDown = 5L
+    // transmit message
+    fun sendMessage(view: View?,  morseLetters: List<MorseCode.Letter>) {
+        Timber.v("logging view here to suppress warnings: $view")
 
-    // transmit message by first turning on the light, then for each character/unit (ie pause) waiting
-    //the designated amount of time and then setting the state
-    fun sendMessage(view: View?, beepList: Map<Char, List<Beep>?>) {
-        setFlashlightState(view, turnOn = true)
-        Timber.i("Tick Tock: Light initial switch on")
-        // TODO: go back and clean up commented out code in MorseCodeHandler
-
-        flashLightTimer(beepList)
-
-
-/*        var timer = Timer()
-        var task : TestTimerTask
-        var firstBeep = true
-
-
-        for (entry in beepList) {
-            Timber.i("The current character is ${entry.key}")
-            for (beep in entry.value!!) {
-                Timber.i("The current beep is $beep")
-                task = TestTimerTask(view, beep.isOn, this)
-                //timer = Timer()
-                timer.schedule(task, 5000)  // TODO: make that 300 be adjustable by user through settings menu
-
-            }
-        }
-        Timber.i("After processing, the list is $beepList")*/
+        flashLightTimer(morseLetters)
     }
 
-    private fun flashLightTimer(beepList: Map<Char, List<Beep>?>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
-        val timer = object: CountDownTimer(countDown*1000, 1000) {
+    private fun flashLightTimer( morseLetters: List<MorseCode.Letter>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
+        val interval = 333L     // TODO: make that countDownInterval be adjustable by user through settings menu
+        var letterNum = 0
+        var beepNum = 0
+        var curLetter: MorseCode.Letter
+        var curBeep: Beep       // TODO: should this be morsecode.beep like the letter is morsecode.letter?
+        var beepCount: Int
+
+        val timer = object: CountDownTimer( 12*interval, interval ) { // TODO: set this back to calculate length but use actual duration not just count of letters (see above line for how it used to be)
+            // TODO: I should probably override the onstart or whatever function so there's not a tick-length delay before it starts (and so I don't have to add 1 to the duration)
             override fun onTick(millisUntilFinished: Long) {
-                countDown--
-                Timber.i("Tick Tock: $countDown... Beep is: $beepList[countdown]")
+                Timber.i("Tick Tock: Letter $letterNum of ${morseLetters.count()}")
+
+                curLetter = morseLetters[letterNum]
+                curBeep = curLetter.code!![beepNum] // getting the beepNumth beep in the list of beeps that is the code attrib on the letter class
+                beepCount = curLetter.code!!.count() // TODO: A) this only works for dots, not dashes and B) the Letter class should have a property that calculates this for me
+                setFlashlightState(curBeep.isOn)
+
+                if (beepNum < beepCount-1) {
+                    beepNum++
+                } else {
+                    letterNum++
+                    beepNum = 0
+                }
+                Timber.i("Tick Tock: the letter is ${curLetter.char} and the beep is $curBeep")
             }
 
             override fun onFinish() {
-                Timber.i("Tick Tock: time's UP!")}
+                Timber.i("Tick Tock: Message Sent!")}
         }
         timer.start()
-    }
-
-
-    // OLD FAILED VERSION OF SEND MESSAGE FUNCTION FOR REF WHILE I WORK ON NEW VERSION!!!
-    fun sendMessageFail(view: View?, beepList: Map<Char, List<Beep>?>) {
-        setFlashlightState(view, turnOn = true)
-        Timber.i("Tick Tock: Light initial switch on")
-        // TODO: go back and clean up commented out code in MorseCodeHandler
-
-        var timer = Timer()
-        var task : TestTimerTask
-        var firstBeep = true
-
-
-        for (entry in beepList) {
-            Timber.i("The current character is ${entry.key}")
-            for (beep in entry.value!!) {
-                Timber.i("The current beep is $beep")
-                task = TestTimerTask(view, beep.isOn, this)
-                //timer = Timer()
-                timer.schedule(task, 5000)  // TODO: make that 300 be adjustable by user through settings menu
-                //toggleFlashlight(view)
-                /*if(beep.isOn) {
-                    setFlashlightState(view, turnOn = false)
-                    Timber.i("Tick Tock: Off!")
-                    //setFlashlightState(view, turnOn = true)
-                    //Timber.i("Tick Tock: On!")
-                } else {
-                    //setFlashlightState(view, turnOn = false)
-                    //Timber.i("Tick Tock: Off!")
-                }*/
-                //FIRST BEEP DETECTION!!!!!
-//                if(!firstBeep){
-//                    //setFlashlightState(view, turnOn = false)
-//                    //Timber.i("Tick Tock: Off!")
-//                    task = TestTimerTask(view, false, this)
-//                    timer = Timer()
-//                    timer.schedule(task, beep.length*2000)
-//                } else {
-//                    firstBeep = false
-//                }
-            }
-        }
-        Timber.i("After processing, the list is $beepList")
-    }
-
-    class TestTimerTask(val view: View?, val isOn: Boolean, val flashlight: FlashlightHandler) : TimerTask() {
-
-        override fun run() {
-            flashlight.toggleFlashlight(view)
-            //Timber.i("Tick Tock: Light is turning ${if(isOn) "off" else "on"}!")
-            Timber.i("Tick Tock: inside the run method")
-
-/*            if(isOn) {
-                //flashlight.setFlashlightState(view, turnOn = false)
-                //Timber.i("Tick Tock: Off!")
-                flashlight.setFlashlightState(view, turnOn = true)
-                Timber.i("Tick Tock: On!")
-            } else {
-                flashlight.setFlashlightState(view, turnOn = false)
-                Timber.i("Tick Tock: Off!")
-            }*/
-
-        }
     }
 
 
@@ -145,8 +75,7 @@ class FlashlightHandler(context: Context?) {
         }
     }
 /// TODO this uses repeated code from the toggle method and should be modified to remove redundancy
-    fun setFlashlightState(view: View?, turnOn: Boolean = true) {
-        Timber.v("logging view here to suppress warnings: $view")
+    fun setFlashlightState(turnOn: Boolean = true) {
         if (turnOn) {
             Timber.i("flashLightOn is $flashLightOn")
             cameraManager.setTorchMode(cameraId, true)
