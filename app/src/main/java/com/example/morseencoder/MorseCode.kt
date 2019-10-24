@@ -67,8 +67,8 @@ enum class Beep(val duration: Int, val isOn: Boolean) {
     DASH(3, isOn = true),
     CHAR_PAUSE(1, isOn = false),  // TODO: I kinda want to figure out how to just automatically add this, but for now I need to spell it out
     CHAR_END(3, isOn = false),
-    SPACE(7, isOn = false)
-} // TODO maybe I should have the CHAR_END and SPACE lengths be correct and subtract from them when they're actually sent?
+    SPACE(4, isOn = false) // the space duration is supposed to be 7, not 4, but in most cases it will be preceded by a CHAR_END which is off for 3 units, so making the correction here
+} // TODO maybe I should have the SPACE length be correct and subtract accordingly from the duration when the message is sent?
 
 /*  MORSE CODE RESOURCES
     https://en.wikipedia.org/wiki/Morse_code
