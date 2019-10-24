@@ -1,7 +1,9 @@
 package com.example.morseencoder.ui
 
 import android.content.Context
-import android.graphics.BitmapFactory
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -11,9 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.graphics.drawable.toDrawable
-import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.morseencoder.BlurBuilder
@@ -85,8 +85,14 @@ class EncoderFragment : Fragment() {
         })
 
         // Blur the button background //
+        val drawable: Drawable = resources.getDrawable(R.drawable.button_background, context?.theme)
+        val bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+        drawable.draw(canvas)
+
         val buttonForBackground = binding.sendMsgBtn
-        val resultBmp = BlurBuilder.blur(context!!, BitmapFactory.decodeResource(resources, R.drawable.stripe))
+        val resultBmp = BlurBuilder.blur(context!!, bitmap)
         buttonForBackground.background = resultBmp.toDrawable(resources)
 
         return binding.root
