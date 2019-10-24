@@ -1,13 +1,7 @@
 package com.example.morseencoder
 
 object MorseCode {
-    val MorseCharacters = mapOf(
-        'A' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DASH, Beep.CHAR_END),
-        'H' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT, Beep.CHAR_END),
-        'I' to listOf(Beep.DOT, Beep.CHAR_PAUSE, Beep.DOT,  Beep.CHAR_END),
-        '|' to listOf(Beep.CHAR_END), //TODO: do I really need this mapping here?
-        ' ' to listOf(Beep.SPACE)
-    )
+
     const val timeUnit = 335 // TODO: either clean this up or actually use it somewhere. currently setting the interval in the timer but should eventually be a user-defined setting
 
 /*    fun make(char: Char) { // put this here envisioning its use for encoding messages one user-entered character at a time: ie MorseCode.make('A')
@@ -18,6 +12,53 @@ object MorseCode {
         val code = MorseCharacters.get(char)
         val duration = code?.sumBy { it.duration }
     }
+
+    val MorseCharacters = mapOf(
+        // LETTERS //
+        'A' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · −
+        'B' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · · ·
+        'C' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · − ·
+        'D' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · ·
+        'E' to listOf(Beep.DOT, Beep.CHAR_END),   // ·
+        'F' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · · − ·
+        'G' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − ·
+        'H' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · · · ·
+        'I' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · ·
+        'J' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · − − −
+        'K' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · −
+        'L' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − · ·
+        'M' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − −
+        'N' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − ·
+        'O' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − − −
+        'P' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − − ·
+        'Q' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − − · −
+        'R' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − ·
+        'S' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · · ·
+        'T' to listOf(Beep.DASH, Beep.CHAR_END),   // −
+        'U' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · −
+        'V' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · · −
+        'W' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · − −
+        'X' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · · −
+        'Y' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · − −
+        'Z' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − · ·
+
+        // NUMBERS //
+        '0' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − − − − −
+        '1' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · − − − −
+        '2' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · − − −
+        '3' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · · − −
+        '4' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · · · −
+        '5' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · · · · ·
+        '6' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · · · ·
+        '7' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − · · ·
+        '8' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − − · ·
+        '9' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − − − ·
+
+        // Other //
+        '|' to listOf(Beep.CHAR_END), //TODO: do I really need this mapping here?
+        ' ' to listOf(Beep.SPACE)
+    //TODO: really want to add the other stuff (puncutation and prosigns) as well
+    )
 
 }
 
