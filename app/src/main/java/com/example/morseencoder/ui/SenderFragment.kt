@@ -70,6 +70,7 @@ class SenderFragment : Fragment() {
             view.findNavController().navigate(R.id.action_senderFragment_to_sentFragment)
             Timber.i("temp finish sending button clicked")
         }
+        secretMessage = model.curSecretMessage.value ?: secretMessage
 
         return binding.root
     }
@@ -131,7 +132,6 @@ class SenderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        //flashlightHandler.setFlashlightState(view, turnOn = true)
         flashlightHandler.setFlashlightState(turnOn = true)
         Timber.i("flashlight turning on")
 
