@@ -46,4 +46,5 @@ dependencies {
 
     // Timber logging
     implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.1.0'
 }

@@ -3,14 +3,21 @@ package com.example.morseencoder.ui
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.morseencoder.R
+import com.example.morseencoder.SharedViewModel
 import com.example.morseencoder.databinding.FragmentEncoderBinding
+import kotlinx.android.synthetic.main.fragment_encoder.*
 import timber.log.Timber
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +35,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class EncoderFragment : Fragment() {
     private lateinit var binding: FragmentEncoderBinding
+    private lateinit var model: SharedViewModel
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -40,6 +48,11 @@ class EncoderFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        model = activity?.run {
+            ViewModelProviders.of(this)[SharedViewModel::class.java] //Note that "this" returns the activity, not the fragment. All fragments use same activity, so will get the same viewmodel
+        } ?: throw Exception("Invalid Activity")
+
     }
 
     override fun onCreateView(
@@ -54,6 +67,19 @@ class EncoderFragment : Fragment() {
             view.findNavController().navigate(R.id.action_encoderFragment_to_senderFragment)
             Timber.i("send message button clicked")
         }
+
+        // save text to viewModel after it's edited
+        binding.messageInput.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(p0: Editable?) {
+                model.updateSecretMessage(messageInput.text.toString())
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+        })
 
         return binding.root
     }

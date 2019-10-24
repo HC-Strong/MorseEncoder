@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.morseencoder.FlashlightHandler
 import com.example.morseencoder.MorseCodeHandler
 import com.example.morseencoder.R
+import com.example.morseencoder.SharedViewModel
 import com.example.morseencoder.databinding.FragmentSenderBinding
 import timber.log.Timber
 
@@ -35,6 +37,7 @@ class SenderFragment : Fragment() {
     private val morseCodeHandler = MorseCodeHandler()
 
     private lateinit var binding : FragmentSenderBinding
+    private lateinit var model: SharedViewModel
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -47,6 +50,10 @@ class SenderFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+        model = activity?.run {
+            ViewModelProviders.of(this)[SharedViewModel::class.java] //Note that "this" returns the activity, not the fragment. All fragments use same activity, so will get the same viewmodel
+        } ?: throw Exception("Invalid Activity")
 
         flashlightHandler = FlashlightHandler(context)
     }
