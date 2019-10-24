@@ -23,9 +23,9 @@ class FlashlightHandler(context: Context?) {
     private fun flashLightTimer( view: View?, morseLetters: List<MorseCode.Letter>) {  //TODO:should I consider making the sendMessage function just be the timer not call it?
         val interval = 333L     // TODO: make that countDownInterval be adjustable by user through settings menu
 
-        var letterNum = 0
-        var beepNum = 0
-        var beepProgress = 0
+        var letterNum = 1
+        var beepNum = 1
+        var beepProgress = 1
 
         var curLetter: MorseCode.Letter
         var curBeep: Beep       // TODO: should this be morsecode.beep like the letter is morsecode.letter?
@@ -37,24 +37,23 @@ class FlashlightHandler(context: Context?) {
 
 
 
-        val timer = object: CountDownTimer( timerLength*interval-1, interval ) {
-            // TODO: I should probably override the onstart or whatever function so there's not a tick-length delay before it starts (and so I don't have to add 1 to the duration)
+        val timer = object: CountDownTimer( timerLength*interval, interval ) {
+
             override fun onTick(millisUntilFinished: Long) {
 
-                curLetter = morseLetters[letterNum]
-                curBeep = curLetter.code!![beepNum] // getting the beepNumth beep in the list of beeps that is the code attrib on the letter class
+                curLetter = morseLetters[letterNum-1]
+                curBeep = curLetter.code!![beepNum-1] // getting the beepNumth beep in the list of beeps that is the code attrib on the letter class
                 beepCount = curLetter.code!!.count() // number of beeps in the current letter to track when complete
                 beepDuration = curBeep.duration
-                //Timber.i("BeepDuration is $beepDuration")
-                //Timber.i("BeepNum is $beepNum")
 
-                Timber.i("Tick Tock: Sending letter ${letterNum+1} of ${morseLetters.count()}: ${curLetter.char}...")
+                Timber.i("Tick Tock: Sending letter ${letterNum} of ${morseLetters.count()}: ${curLetter.char}...")
+                //Timber.i("for beepNum $beepNum: beepCount is $beepCount, beepDuration is $beepDuration, and beepProgress is $beepProgress")
                 setFlashlightState(curBeep.isOn)
 
                 when {
-                    beepProgress < beepDuration-1   -> {beepProgress++}
-                    beepNum < beepCount-1           -> {beepNum++; beepProgress = 0}
-                    else                            -> {letterNum++; beepNum = 0}
+                    beepProgress < beepDuration   -> {beepProgress++}
+                    beepNum < beepCount           -> {beepNum++; beepProgress = 1}
+                    else                            -> {letterNum++; beepNum = 1; beepProgress = 1}
                 }
             }
 
