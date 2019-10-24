@@ -37,13 +37,13 @@ class FlashlightHandler(context: Context?) {
 
 
 
-        val timer = object: CountDownTimer( timerLength*interval, interval ) { // TODO: set this back to calculate length but use actual duration not just count of letters (see above line for how it used to be)
+        val timer = object: CountDownTimer( timerLength*interval-1, interval ) {
             // TODO: I should probably override the onstart or whatever function so there's not a tick-length delay before it starts (and so I don't have to add 1 to the duration)
             override fun onTick(millisUntilFinished: Long) {
 
                 curLetter = morseLetters[letterNum]
                 curBeep = curLetter.code!![beepNum] // getting the beepNumth beep in the list of beeps that is the code attrib on the letter class
-                beepCount = curLetter.code!!.count() // TODO: I'm not sure I like having to put all the CHAR_END and CHAR_PAUSE beeps in here to get this to work out right. Kinda want a method for Letter that will return the correct value
+                beepCount = curLetter.code!!.count() // number of beeps in the current letter to track when complete
                 beepDuration = curBeep.duration
                 //Timber.i("BeepDuration is $beepDuration")
                 //Timber.i("BeepNum is $beepNum")

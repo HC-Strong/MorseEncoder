@@ -132,10 +132,8 @@ class SenderFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        flashlightHandler.setFlashlightState(turnOn = true)
-        Timber.i("flashlight turning on")
 
-        // SEND MESSAGE
+        // SEND MESSAGE //
         val messageToSend = morseCodeHandler.encodeString(secretMessage)
         flashlightHandler.sendMessage(view, messageToSend)
 
