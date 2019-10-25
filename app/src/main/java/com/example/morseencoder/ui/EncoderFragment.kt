@@ -86,7 +86,7 @@ class EncoderFragment : Fragment() {
 
         // Blur the button background //
         val drawable: Drawable = resources.getDrawable(R.drawable.button_background, context?.theme)
-        val bitmap = Bitmap.createBitmap(200, 200, Bitmap.Config.ARGB_8888)
+        val bitmap = Bitmap.createBitmap(100, 73, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
         drawable.draw(canvas)

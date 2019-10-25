@@ -5,12 +5,15 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColor">@color/defaultText</item>
         <item name="android:positiveButtonText">@color/defaultText</item>
         <item name="android:editTextColor">@color/defaultText</item>
         <item name="android:textColorHint">@color/defaultText</item>
+
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+
         <item name="android:windowBackground">@drawable/background_stripes</item>
     </style>
 
