@@ -2,13 +2,14 @@
 <resources>
     <color name="colorPrimary">@color/defaultBackground_Light</color>
     <color name="colorPrimaryDark">@color/defaultBackground_Dark</color>
-    <color name="colorAccent">#D81B60</color>
-    <color name="defaultBackground_Dark">#44372E</color>
-    <color name="defaultBackground_Light">#2E373E</color>
+    <color name="colorAccent">#FFBF00</color>
+    <color name="defaultBackground_Dark">#090609</color>
+    <color name="defaultBackground_Light">#091418</color>
 
     <color name="darkBlue">#001144</color>
-    <color name="defaultText">#FFBF00</color>
+    <color name="defaultText">@color/colorAccent</color>
     <color name="brightText">#FFEEBE</color>
+    <color name="darkText">@color/colorPrimaryDark</color>
     <color name="defaultButtonBackground">#2A5371</color>
     <color name="defaultButtonBorder">#5B7FA0</color>
 </resources>
