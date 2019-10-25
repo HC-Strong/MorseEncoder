@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">@color/defaultBackground_Light</color>
-    <color name="colorPrimaryDark">@color/defaultBackground_Dark</color>
-    <color name="colorAccent">#FFBF00</color>
-    <color name="defaultBackground_Dark">#090609</color>
-    <color name="defaultBackground_Light">#091418</color>
+    <color name="colorPrimary">#14FFFFFF</color>
+    <color name="colorPrimaryDark">#121212</color>
 
-    <color name="darkBlue">#001144</color>
-    <color name="defaultText">@color/colorAccent</color>
-    <color name="brightText">#FFEEBE</color>
+    <color name="colorAccent">#D92300</color>
+
+    <color name="defaultText">#FFF</color>
     <color name="darkText">@color/colorPrimaryDark</color>
-    <color name="defaultButtonBackground">#2A5371</color>
-    <color name="defaultButtonBorder">#5B7FA0</color>
 
-    <color name="brightRed">#99FF2400</color>
-    <color name="darkRed">#12FF2400</color>
 </resources>
