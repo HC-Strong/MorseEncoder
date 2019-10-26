@@ -14,6 +14,7 @@
         <item name="android:textColorHint">@color/defaultText</item>
 
         <item name="android:buttonStyle">@style/ButtonStyle</item>
+        <item name="spinnerStyle">@style/modeSpinnerStyle</item>
 
         <item name="android:windowBackground">@color/colorPrimaryDark</item>
 
@@ -30,6 +31,14 @@
         <item name="android:background">@color/colorPrimary</item>
         <item name="tabSelectedTextColor">@color/colorAccent</item>
         <item name="tabTextColor">@color/dimmedText</item>
+    </style>
+
+    <style name="modeSpinnerStyle">
+        <item name="android:popupBackground">@color/colorPrimary</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:background">@drawable/mode_select_shape</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:dropDownSelector">@android:drawable/arrow_down_float</item>
     </style>
 
 </resources>

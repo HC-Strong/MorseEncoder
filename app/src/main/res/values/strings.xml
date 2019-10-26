@@ -15,8 +15,13 @@
     <string name="flashlight">flashlight</string>
     <string name="flashing_light">Flashing Light</string>
     <string name="sent_info">Your Secret Message has been sent!</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="decoderScreenTitle">Decoder</string>
+
+    <string name="mode_selection_prompt">Choose an Option</string>
+
+    <string-array name="encoder_mode_array">
+        <item>Text Entry Mode</item>
+        <item>Morse Code Mode</item>
+        <item>Manual Mode</item>
+    </string-array>
 </resources>

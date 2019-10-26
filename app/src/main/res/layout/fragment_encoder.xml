@@ -27,9 +27,22 @@
 
             <Spinner
                 android:id="@+id/encoderModeSelection"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
+
+                android:clickable="true"
+                android:dropDownSelector="@android:drawable/arrow_down_float"
+                android:entries="@array/encoder_mode_array"
+                android:fadingEdge="horizontal|vertical"
+
+                android:gravity="center"
+
+                android:hapticFeedbackEnabled="true"
+                android:paddingVertical="4dp"
+                android:paddingStart="6dp"
+                android:paddingEnd="21dp"
+                android:prompt="@string/mode_selection_prompt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/encoderTitleTextView" />
@@ -53,7 +66,7 @@
                 android:layout_width="0dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="100dp"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:layout_marginBottom="32dp"
                 android:paddingTop="16dp"
@@ -72,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:height="100dp"
                 android:autofillHints="@string/enter_message_prompt"
