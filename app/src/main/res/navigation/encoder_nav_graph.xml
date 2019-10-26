@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_encoderFragment_to_senderFragment"
             app:destination="@id/senderFragment" />
-        <action
-            android:id="@+id/action_encoderFragment_to_decoderFragment"
-            app:destination="@id/decoderFragment" />
     </fragment>
     <fragment
         android:id="@+id/senderFragment"
@@ -33,15 +30,6 @@
         tools:layout="@layout/fragment_sent" >
         <action
             android:id="@+id/action_sentFragment_to_encoderFragment"
-            app:destination="@id/encoderFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/decoderFragment"
-        android:name="com.example.morseencoder.ui.DecoderFragment"
-        android:label="fragment_decoder"
-        tools:layout="@layout/fragment_decoder" >
-        <action
-            android:id="@+id/action_decoderFragment_to_encoderFragment"
             app:destination="@id/encoderFragment" />
     </fragment>
 </navigation>

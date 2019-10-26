@@ -1,9 +1,6 @@
 package com.example.morseencoder.ui
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -12,11 +9,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.graphics.drawable.toDrawable
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.example.morseencoder.BlurBuilder
 import com.example.morseencoder.R
 import com.example.morseencoder.SharedViewModel
 import com.example.morseencoder.databinding.FragmentEncoderBinding
@@ -83,17 +78,6 @@ class EncoderFragment : Fragment() {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
         })
-
-        // Blur the button background //
-        val drawable: Drawable = resources.getDrawable(R.drawable.button_background, context?.theme)
-        val bitmap = Bitmap.createBitmap(100, 73, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
-        drawable.draw(canvas)
-
-        val buttonForBackground = binding.sendMsgBtn
-        val resultBmp = BlurBuilder.blur(context!!, bitmap)
-        buttonForBackground.background = resultBmp.toDrawable(resources)
 
         return binding.root
     }

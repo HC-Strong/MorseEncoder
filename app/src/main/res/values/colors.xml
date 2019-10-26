@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#14FFFFFF</color>
+    <color name="colorPrimary">#14FFFFFF</color> <!-- This is supposed to be white with 8% opacity ontop of the bg color, but something wasn't working right -->
     <color name="colorPrimaryDark">#121212</color>
 
     <color name="colorAccent">#D92300</color>
 
     <color name="defaultText">#FFF</color>
+    <color name="dimmedText">#70FFFFFF</color>
     <color name="darkText">@color/colorPrimaryDark</color>
 
 </resources>

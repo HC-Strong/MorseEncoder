@@ -33,3 +33,18 @@ internal object BlurBuilder {
         return outputBitmap
     }
 }
+
+// No longer using this, but keeping it around in case I want it for something later
+// The code to use this class to blur the drawable called button_background and set it as the background
+    //for the sendMsgBtn is below
+
+/*// Blur the button background //
+val drawable: Drawable = resources.getDrawable(R.drawable.button_background, context?.theme)
+val bitmap = Bitmap.createBitmap(100, 73, Bitmap.Config.ARGB_8888)
+val canvas = Canvas(bitmap)
+drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight())
+drawable.draw(canvas)
+
+val buttonForBackground = binding.sendMsgBtn
+val resultBmp = BlurBuilder.blur(context!!, bitmap)
+buttonForBackground.background = resultBmp.toDrawable(resources)*/
