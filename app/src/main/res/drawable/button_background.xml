@@ -4,8 +4,8 @@
 
     <solid android:color="@color/colorAccent"/>
     <corners
-        android:bottomLeftRadius="10dp"
-        android:bottomRightRadius="10dp"
-        android:radius="40dp" />
+        android:bottomLeftRadius="5dp"
+        android:bottomRightRadius="5dp"
+        android:radius="20dp" />
     <stroke android:width="0px" android:color="@color/colorAccent" />
 </shape>

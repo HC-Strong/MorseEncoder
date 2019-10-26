@@ -8,7 +8,7 @@
     <string name="finish_sending">Finish Sending</string>
     <string name="send_another_message">Send Another Message</string>
     <string name="encoder_info">Enter a secret message and hit the button to send your message encoded as morse code flashes</string>
-    <string name="enter_message_prompt">Tap to Enter Your Secret Message!</string>
+    <string name="enter_message_prompt">Enter Your Secret Message!</string>
     <string name="prev_messages">Previous Secret Messages</string>
     <string name="dummy_text">hi</string>
     <string name="secret_message">Secret Message</string>

@@ -17,7 +17,7 @@
                 android:id="@+id/encoderTitleTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="4dp"
                 android:text="@string/encoderScreenTitle"
                 android:textSize="36sp"
@@ -25,25 +25,35 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <Spinner
+                android:id="@+id/encoderModeSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/encoderTitleTextView" />
+
             <TextView
                 android:id="@+id/encoderInfoTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:text="@string/encoder_info"
                 android:textAlignment="center"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/encoderTitleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/encoderModeSelection" />
 
             <Button
                 android:id="@+id/sendMsgBtn"
                 android:layout_width="0dp"
                 android:layout_height="73dp"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="190dp"
+                android:layout_marginTop="65dp"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:layout_marginBottom="32dp"
                 android:paddingTop="16dp"
@@ -54,7 +64,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/encoderTitleTextView"
+                app:layout_constraintTop_toBottomOf="@+id/messageInput"
                 app:layout_constraintVertical_bias="0.0" />
 
             <EditText
@@ -62,13 +72,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/margin_default"
+                android:height="100dp"
                 android:autofillHints="@string/enter_message_prompt"
-                android:backgroundTint="@color/colorAccent"
-                android:ems="10"
+                android:background="@drawable/edit_text_background"
+                android:gravity="start|bottom"
                 android:hint="@string/enter_message_prompt"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:singleLine="false"
+                android:textAlignment="viewStart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/encoderInfoTextView" />
@@ -93,7 +108,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/prevMsgListTitleTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/prevMsgListTitleTextView" >
+
+            </ListView>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
