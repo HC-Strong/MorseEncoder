@@ -3,7 +3,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.SenderFragment">
+    tools:context=".ui.EncoderFragment">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -13,83 +13,107 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/senderTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="4dp"
-                android:text="@string/senderScreenTitle"
-                android:textSize="36sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/sendingMsgTextView"
+            <LinearLayout
+                android:id="@+id/senderLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="126dp"
-                android:layout_marginEnd="@dimen/margin_default"
-                android:hint="@string/secret_message"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/senderTitleTextView" />
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/cancelSendBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.36">
+
+                <TextView
+                    android:id="@+id/senderTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/special_elite"
+                    android:text="@string/senderScreenTitle"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/senderInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:text="@string/encoder_info"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/senderImageView"
+                    android:layout_width="@dimen/light_size"
+                    android:layout_height="@dimen/light_size"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="-4dp"
+                    android:layout_marginBottom="40dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
+                    app:srcCompat="@drawable/light_off"
+                    android:contentDescription="@string/flashing_light" />
+
+                <TextView
+                    android:id="@+id/senderMessageDisplay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:height="100dp"
+                    android:background="@drawable/message_view_background"
+                    android:gravity="start|bottom"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="false"
+                    android:textAlignment="viewStart"
+                    tools:text="Hello, this is your secret message" />
+            </LinearLayout>
 
             <Button
-                android:id="@+id/tempFinishSendingBtn"
+                android:id="@+id/cancelSendBtn"
+                style="@style/ButtonStyle_Outlined"
                 android:layout_width="0dp"
-                android:layout_height="73dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="190dp"
                 android:layout_marginEnd="@dimen/margin_default"
-                android:layout_marginBottom="32dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="@string/finish_sending"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/cancel_send"
+                android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/senderTitleTextView"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="@+id/guideline_80per" />
 
-            <ImageView
-                android:id="@+id/flashlightImageView"
-                android:layout_width="200dp"
-                android:layout_height="200dp"
-                android:layout_marginTop="126dp"
-                android:contentDescription="@string/flashlight"
-                android:rotation="-90"
-                android:scaleType="fitCenter"
-                android:src="@android:drawable/ic_lock_silent_mode"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendingMsgTextView"
-                app:layout_constraintVertical_bias="0.717" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_25per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
 
-            <ImageView
-                android:id="@+id/lightImageView"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="@dimen/margin_default"
-                android:contentDescription="@string/flashing_light"
-                android:scaleType="fitXY"
-                android:src="@android:drawable/arrow_down_float"
-                android:tint="#FFC107"
-                android:tintMode="multiply"
-                app:layout_constraintBottom_toBottomOf="@+id/flashlightImageView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendingMsgTextView"
-                app:layout_constraintVertical_bias="0.785" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_50per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="84dp"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_80per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 </layout>

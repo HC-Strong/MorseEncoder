@@ -14,7 +14,7 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/encoderLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -49,11 +49,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-
                     android:layout_marginTop="-4dp"
-
                     android:layout_marginBottom="40dp"
-
                     android:clickable="true"
                     android:dropDownSelector="@android:drawable/arrow_down_float"
                     android:entries="@array/encoder_mode_array"
@@ -66,7 +63,7 @@
                     android:prompt="@string/mode_selection_prompt" />
 
                 <EditText
-                    android:id="@+id/messageInput"
+                    android:id="@+id/encoderMessageInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -98,7 +95,6 @@
                 android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toEndOf="@id/guideline_80per"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline_80per" />
 

@@ -18,6 +18,7 @@
     <string name="decoderScreenTitle">Decoder</string>
 
     <string name="mode_selection_prompt">Choose an Option</string>
+    <string name="cancel_send">Cancel Transmission</string>
 
     <string-array name="encoder_mode_array">
         <item>Text Entry Mode</item>

@@ -3,7 +3,12 @@
     <dimen name="margin_default">32dp</dimen>
     <dimen name="radius_default">20dp</dimen>
 
+    <dimen name="text_size_default">18dp</dimen>
     <dimen name="text_size_large">64sp</dimen>
     <dimen name="text_size_medium">24sp</dimen>
     <dimen name="text_size_small">8sp</dimen>
+
+    <dimen name="outline_width">3dp</dimen>
+
+    <dimen name="light_size">33dp</dimen>
 </resources>
