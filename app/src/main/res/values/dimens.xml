@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_default">32dp</dimen>
+    <dimen name="radius_default">20dp</dimen>
+
+    <dimen name="text_size_large">64sp</dimen>
+    <dimen name="text_size_medium">24sp</dimen>
+    <dimen name="text_size_small">8sp</dimen>
 </resources>

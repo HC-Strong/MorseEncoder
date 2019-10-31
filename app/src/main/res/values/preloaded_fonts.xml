@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/special_elite</item>
+        <item>@font/fira_sans</item>
+
+        <!-- other fonts I liked and may swap in -->
+        <!-- <item>@font/poppins</item> -->
+        <!-- <item>@font/raleway_medium</item> -->
+        <!-- <item>@font/roboto</item> -->
+
+    </array>
+</resources>

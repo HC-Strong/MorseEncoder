@@ -13,117 +13,139 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/encoderTitleTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="4dp"
-                android:text="@string/encoderScreenTitle"
-                android:textSize="36sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/encoderModeSelection"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-
-                android:clickable="true"
-                android:dropDownSelector="@android:drawable/arrow_down_float"
-                android:entries="@array/encoder_mode_array"
-                android:fadingEdge="horizontal|vertical"
-
-                android:gravity="center"
-
-                android:hapticFeedbackEnabled="true"
-                android:paddingVertical="4dp"
-                android:paddingStart="6dp"
-                android:paddingEnd="21dp"
-                android:prompt="@string/mode_selection_prompt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/encoderTitleTextView" />
-
-            <TextView
-                android:id="@+id/encoderInfoTextView"
+            <LinearLayout
+                android:id="@+id/linearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="32dp"
-                android:layout_marginEnd="@dimen/margin_default"
-                android:text="@string/encoder_info"
-                android:textAlignment="center"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/encoderModeSelection" />
+                android:orientation="vertical"
+                app:layout_constraintBottom_toTopOf="@+id/sendMsgBtn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.36">
+
+                <TextView
+                    android:id="@+id/encoderTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/special_elite"
+                    android:text="@string/encoderScreenTitle"
+                    android:textSize="@dimen/text_size_large" />
+
+                <TextView
+                    android:id="@+id/encoderInfoTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:text="@string/encoder_info"
+                    android:textAlignment="center"
+                    android:visibility="gone" />
+
+                <Spinner
+                    android:id="@+id/encoderModeSelection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+
+                    android:layout_marginTop="-4dp"
+
+                    android:layout_marginBottom="40dp"
+
+                    android:clickable="true"
+                    android:dropDownSelector="@android:drawable/arrow_down_float"
+                    android:entries="@array/encoder_mode_array"
+                    android:fadingEdge="horizontal|vertical"
+                    android:gravity="center"
+                    android:hapticFeedbackEnabled="true"
+                    android:paddingVertical="4dp"
+                    android:paddingStart="6dp"
+                    android:paddingEnd="21dp"
+                    android:prompt="@string/mode_selection_prompt" />
+
+                <EditText
+                    android:id="@+id/messageInput"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/margin_default"
+                    android:layout_marginEnd="@dimen/margin_default"
+                    android:height="100dp"
+                    android:autofillHints="@string/enter_message_prompt"
+                    android:background="@drawable/edit_text_background"
+                    android:gravity="start|bottom"
+                    android:hint="@string/enter_message_prompt"
+                    android:inputType="textMultiLine"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:singleLine="false"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
 
             <Button
                 android:id="@+id/sendMsgBtn"
                 android:layout_width="0dp"
-                android:layout_height="73dp"
-                android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="100dp"
-                android:layout_marginEnd="@dimen/margin_default"
-                android:layout_marginBottom="32dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
-                android:text="@string/send_message"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/messageInput"
-                app:layout_constraintVertical_bias="0.0" />
-
-            <EditText
-                android:id="@+id/messageInput"
-                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="24dp"
                 android:layout_marginEnd="@dimen/margin_default"
-                android:height="100dp"
-                android:autofillHints="@string/enter_message_prompt"
-                android:background="@drawable/edit_text_background"
-                android:gravity="start|bottom"
-                android:hint="@string/enter_message_prompt"
-                android:inputType="textMultiLine"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp"
-                android:singleLine="false"
-                android:textAlignment="viewStart"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:text="@string/send_message"
+                android:textAllCaps="true"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toEndOf="@id/guideline_80per"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/encoderInfoTextView" />
+                app:layout_constraintTop_toTopOf="@+id/guideline_80per" />
 
-            <TextView
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_25per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_50per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="84dp"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_80per"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.8" />
+
+            <!-- <TextView
                 android:id="@+id/prevMsgListTitleTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_default"
-                android:layout_marginTop="110dp"
                 android:layout_marginEnd="@dimen/margin_default"
                 android:text="@string/prev_messages"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sendMsgBtn" />
+                tools:layout_editor_absoluteY="510dp" />
 
             <ListView
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/margin_default"
                 android:layout_marginEnd="@dimen/margin_default"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/prevMsgListTitleTextView" >
-
-            </ListView>
+                tools:layout_editor_absoluteY="731dp">
+            </ListView> -->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
