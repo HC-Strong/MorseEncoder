@@ -66,7 +66,7 @@ class SenderFragment : Fragment() {
         // then return the root of the binding as the view
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sender, container, false)
 
-        binding.tempFinishSendingBtn.setOnClickListener {view : View ->
+        binding.cancelSendBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_senderFragment_to_sentFragment)
             Timber.i("temp finish sending button clicked")
         }

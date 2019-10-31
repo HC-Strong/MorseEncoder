@@ -67,9 +67,9 @@ class EncoderFragment : Fragment() {
         }
 
         // save text to viewModel after it's edited
-        binding.messageInput.addTextChangedListener(object : TextWatcher {
+        binding.encoderMessageInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
-                model.updateSecretMessage(messageInput.text.toString())
+                model.updateSecretMessage(encoderMessageInput.text.toString())
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {

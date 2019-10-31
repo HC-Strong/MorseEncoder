@@ -51,9 +51,9 @@ class SentFragment : Fragment() {
         // then return the root of the binding as the view
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sent, container, false)
 
-        binding.restartBtn.setOnClickListener {view : View ->
+        binding.restartSendBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_sentFragment_to_encoderFragment)
-            Timber.i("reestart button clicked")
+            Timber.i("restart button clicked")
         }
 
         return binding.root
