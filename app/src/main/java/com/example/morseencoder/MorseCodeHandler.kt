@@ -8,7 +8,7 @@ class MorseCodeHandler {
         //TODO: eventually, I might want a list of words (that contain letters)
         Timber.i("The full secret message is $message")
 
-        val charArray = message.toCharArray().map {it.toUpperCase()}
+        val charArray = message.trim().toCharArray().map {it.toUpperCase()}
         val sanitizedCharArray: MutableList<Char> = arrayListOf()
         val morseLetters: MutableList<MorseCode.Letter> = arrayListOf()
         val illegalCharacters: MutableList<Char> = arrayListOf()
