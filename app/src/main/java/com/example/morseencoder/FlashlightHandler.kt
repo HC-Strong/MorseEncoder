@@ -35,7 +35,7 @@ class FlashlightHandler(context: Context?) {
         var beepCount: Int
         var beepDuration: Int
 
-       val timerLength = morseLetters.sumBy { it.duration!! }
+       val timerLength = morseLetters.sumBy { it.duration!! }.minus(Beep.CHAR_END.duration)
 
 
 
