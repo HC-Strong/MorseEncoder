@@ -13,6 +13,8 @@ class FlashlightHandler(context: Context?) {
     private var cameraId : String = getCameraId(cameraManager)
     private var flashLightOn = false
 
+    lateinit var timer: CountDownTimer
+
     // transmit message
     fun sendMessage(view: View?,  morseLetters: List<MorseCode.Letter>) {
         Timber.v("logging view here to suppress warnings: $view")
@@ -37,7 +39,7 @@ class FlashlightHandler(context: Context?) {
 
 
 
-        val timer = object: CountDownTimer( timerLength*interval, interval ) {
+        timer = object: CountDownTimer( timerLength*interval, interval ) {
 
             override fun onTick(millisUntilFinished: Long) {
 
@@ -53,7 +55,7 @@ class FlashlightHandler(context: Context?) {
                 when {
                     beepProgress < beepDuration   -> {beepProgress++}
                     beepNum < beepCount           -> {beepNum++; beepProgress = 1}
-                    else                            -> {letterNum++; beepNum = 1; beepProgress = 1}
+                    else                          -> {letterNum++; beepNum = 1; beepProgress = 1}
                 }
             }
 
@@ -61,6 +63,8 @@ class FlashlightHandler(context: Context?) {
                 Timber.i("Tick Tock: Message Sent!")
                 view?.findNavController()?.navigate(R.id.action_senderFragment_to_sentFragment)
             }
+
+
         }
         timer.start()
     }

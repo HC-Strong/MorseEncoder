@@ -3,6 +3,7 @@ package com.example.morseencoder.ui
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -58,6 +59,11 @@ class SenderFragment : Fragment() {
         flashlightHandler = FlashlightHandler(context)
     }
 
+    private fun CountDownTimer.stopTransmission() {
+        this.cancel()
+        flashlightHandler.setFlashlightState(false)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -68,7 +74,8 @@ class SenderFragment : Fragment() {
 
         binding.cancelSendBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_senderFragment_to_sentFragment)
-            Timber.i("temp finish sending button clicked")
+            flashlightHandler.timer.stopTransmission()
+            Timber.i("transmission is being cancelled")
         }
         secretMessage = model.curSecretMessage.value ?: secretMessage
 
