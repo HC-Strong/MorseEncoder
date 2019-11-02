@@ -30,6 +30,7 @@
                     android:layout_marginTop="8dp"
                     android:fontFamily="@font/special_elite"
                     android:text="@string/sentScreenTitle"
+                    android:textAlignment="center"
                     android:textSize="@dimen/text_size_large" />
 
                 <TextView

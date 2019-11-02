@@ -38,7 +38,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class SenderFragment : Fragment() {
 
-    private var secretMessage = "hi" // TODO: can I get rid of this?
+    private var secretMessage = "HI" // TODO: can I get rid of this?
     private lateinit var flashlightHandler: FlashlightHandler
     private val morseCodeHandler = MorseCodeHandler()
 
@@ -74,6 +74,7 @@ class SenderFragment : Fragment() {
         binding.cancelSendBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_senderFragment_to_sentFragment)
             flashlightHandler.timer.stopTransmission()
+            model.messageCancelled.value = true
             Timber.i("transmission is being cancelled")
         }
 
@@ -85,25 +86,34 @@ class SenderFragment : Fragment() {
         model.lightOn.observe(this, Observer { lightState ->
             if(lightState == true) {binding.senderLightView.setImageResource(R.drawable.light_on)} else {binding.senderLightView.setImageResource(R.drawable.light_off) }
         })
-        model.sendingCharacter.observe(this, Observer { curChar ->
+        model.curCharacter.observe(this, Observer { curChar ->
             setHighlightedText(curChar)
         })
-        model.sendingCharacter.value = 0
+        model.curCharacter.value = 0
 
         // create flashlight handler for use sending message
         flashlightHandler = FlashlightHandler(context, model)
 
 
         // TODO: think about whether it's worthwhile to have secret message as a local var, as livedata and as the text string
-        binding.senderMessageDisplay.text = model.curSecretMessage.value.toString()
-        secretMessage = model.curSecretMessage.value ?: secretMessage
+        // TODO: this is a lot of code to just set the secret message to the input message or to "hi" if there isn't one
+        val modelMessage = model.curSecretMessage.value.toString()
+        if (modelMessage.isNotEmpty()) {
+            binding.senderMessageDisplay.text = model.curSecretMessage.value.toString()
+            secretMessage = model.curSecretMessage.value ?: secretMessage
+        } else {
+            binding.senderMessageDisplay.text = secretMessage
+        }
+        model.curSecretMessage.value = secretMessage
+
+
         Timber.i("SecretMessage is $secretMessage and the text I'm trying to modify is ${binding.senderMessageDisplay.text}")
 
         return binding.root
     }
 
     // Set text span to be colored red to display currently sending character
-    fun setHighlightedText(position: Int) {
+    private fun setHighlightedText(position: Int) {
 
         val redPos = if(position < secretMessage.length) {position} else {secretMessage.length}
 
@@ -116,7 +126,6 @@ class SenderFragment : Fragment() {
 
         spannableString.setSpan(whiteTextSpan, whitePos, whitePos+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableString.setSpan(redTextSpan, redPos, redPos+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-
 
         binding.senderMessageDisplay.text = spannableString
     }

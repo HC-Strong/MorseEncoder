@@ -54,6 +54,10 @@ class SentFragment : Fragment() {
         model.curSecretMessage.observe(this, Observer { message ->
             binding.sentMessageDisplay.text = message.toString()
         })
+
+        model.messageCancelled.observe(this, Observer { isCancelled ->
+            if(isCancelled) {binding.sentTitleTextView.text = resources.getText(R.string.sentScreenTitle_Cancelled)}
+        })
     }
 
     override fun onCreateView(

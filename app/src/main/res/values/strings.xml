@@ -1,29 +1,40 @@
 <resources>
     <string name="app_name">MorseEncoder</string>
 
+    <!-- ENCODER STRINGS -->
     <string name="encoderScreenTitle">Encoder</string>
-    <string name="sentScreenTitle">Message Sent</string>
     <string name="senderScreenTitle">Sending…</string>
-    <string name="send_message">send message</string>
+    <string name="sentScreenTitle">Message Sent</string>
+    <string name="sentScreenTitle_Cancelled">Cancelled</string>
+
+    <string name="send_message">Send Message</string>
     <string name="finish_sending">Finish Sending</string>
     <string name="send_another_message">Send Another Message</string>
-    <string name="encoder_info">Enter a secret message and hit the button to send your message encoded as morse code flashes</string>
+
+
     <string name="enter_message_prompt">Enter Your Secret Message!</string>
     <string name="prev_messages">Previous Secret Messages</string>
-    <string name="dummy_text">hi</string>
-    <string name="secret_message">Secret Message</string>
-    <string name="flashlight">flashlight</string>
-    <string name="flashing_light">Flashing Light</string>
     <string name="sent_info">Your Secret Message has been sent!</string>
-    <string name="decoderScreenTitle">Decoder</string>
+    <string name="secret_message">Secret Message</string>
+
+    <string name="flashlight">Flashlight</string>
+    <string name="flashing_light">Flashing Light</string>
+    <string name="inactive_light">Inactive light</string>
+
+    <string name="dummy_text">hi</string>
 
     <string name="mode_selection_prompt">Choose an Option</string>
     <string name="cancel_send">Cancel Transmission</string>
-    <string name="inactive_light">Inactive light</string>
 
     <string-array name="encoder_mode_array">
         <item>Text Entry Mode</item>
         <item>Morse Code Mode</item>
         <item>Manual Mode</item>
     </string-array>
+
+
+    <string name="encoder_info">Enter a secret message and hit the button to send your message encoded as morse code flashes</string>
+
+    <!-- DECODER STRINGS -->
+    <string name="decoderScreenTitle">Decoder</string>
 </resources>
