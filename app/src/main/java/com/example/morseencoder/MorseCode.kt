@@ -56,6 +56,26 @@ object MorseCode {
         '8' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − − · ·
         '9' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − − − ·
 
+        // PUNCTUATION // <-- Note that not all punctuation is recommended (ie, the ! not). But I think it's a good idea to keep them all here for ease of use
+        '.' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · − · − · −
+        ',' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − − · · − −
+        '?' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · · − − · ·
+        '\'' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − − − − ·
+        '!' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · − · − −
+        '/' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · · − ·
+        '(' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · − − ·
+        ')' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · − − · −
+        '&' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − · · ·
+        ':' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − − − · · ·
+        ';' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // − · − · − ·
+        '=' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · · · −
+        '+' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − · − ·
+        '-' to listOf(Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // − · · · · −
+        '_' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · − − · −
+        '"' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − · · − ·
+        '$' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_END),   // · · · − · · −
+        '@' to listOf(Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_PAUSE,  Beep.DASH, Beep.CHAR_PAUSE,  Beep.DOT, Beep.CHAR_END),   // · − − · − ·
+
         // Other //
         '|' to listOf(Beep.CHAR_END), //TODO: do I really need this mapping here?
         ' ' to listOf(Beep.SPACE)
