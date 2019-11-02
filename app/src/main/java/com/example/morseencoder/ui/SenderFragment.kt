@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.morseencoder.FlashlightHandler
@@ -56,7 +57,12 @@ class SenderFragment : Fragment() {
             ViewModelProviders.of(this)[SharedViewModel::class.java] //Note that "this" returns the activity, not the fragment. All fragments use same activity, so will get the same viewmodel
         } ?: throw Exception("Invalid Activity")
 
-        flashlightHandler = FlashlightHandler(context)
+        // Set up observation relationships with LiveData
+        model.lightOn.observe(this, Observer { lightState ->
+            if(lightState == true) {binding.senderLightView.setImageResource(R.drawable.light_on)} else {binding.senderLightView.setImageResource(R.drawable.light_off) }
+        })
+
+        flashlightHandler = FlashlightHandler(context, model)
     }
 
     private fun CountDownTimer.stopTransmission() {

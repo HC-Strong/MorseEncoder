@@ -66,7 +66,7 @@ class EncoderFragment : Fragment() {
             Timber.i("send message button clicked")
         }
 
-        // save text to viewModel after it's edited
+        // save text to viewModel after it's edited   // TODO: I'm not using the observer pattern here so maybe I need to rethink
         binding.encoderMessageInput.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
                 model.updateSecretMessage(encoderMessageInput.text.toString())

@@ -45,7 +45,7 @@
                     android:visibility="gone" />
 
                 <ImageView
-                    android:id="@+id/senderImageView"
+                    android:id="@+id/senderLightView"
                     android:layout_width="@dimen/light_size"
                     android:layout_height="@dimen/light_size"
                     android:layout_gravity="center"

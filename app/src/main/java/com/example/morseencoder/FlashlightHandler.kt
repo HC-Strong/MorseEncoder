@@ -8,7 +8,7 @@ import android.view.View
 import androidx.navigation.findNavController
 import timber.log.Timber
 
-class FlashlightHandler(context: Context?) {
+class FlashlightHandler(context: Context?, private val viewModel: SharedViewModel) {
     private var cameraManager = context?.getSystemService(Context.CAMERA_SERVICE) as CameraManager
     private var cameraId : String = getCameraId(cameraManager)
     private var flashLightOn = false
@@ -35,7 +35,7 @@ class FlashlightHandler(context: Context?) {
         var beepCount: Int
         var beepDuration: Int
 
-       val timerLength = morseLetters.sumBy { it.duration!! }.minus(Beep.CHAR_END.duration)
+       val timerLength = morseLetters.sumBy { it.duration!! }.minus(Beep.CHAR_END.duration).plus(Beep.CHAR_PAUSE.duration) // reduce the pause at the end of the message from 3 units to 1 for better pacing
 
 
 
@@ -97,10 +97,12 @@ class FlashlightHandler(context: Context?) {
             //Timber.i("flashLightOn is $flashLightOn")
             cameraManager.setTorchMode(cameraId, true)
             flashLightOn = true
+            viewModel.lightOn.value = true // TODO: setting the local variable flashLightOn and the viewModel livedata lightOn seems pretty redundant. should switch to just using the livedata here and when it's turned off below
         } else {
             //Timber.i("flashLightOn is $flashLightOn")
             cameraManager.setTorchMode(cameraId, false)
             flashLightOn = false
+            viewModel.lightOn.value = false
         }
     }
 }
