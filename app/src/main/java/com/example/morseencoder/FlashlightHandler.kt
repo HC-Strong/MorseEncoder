@@ -55,7 +55,7 @@ class FlashlightHandler(context: Context?, private val viewModel: SharedViewMode
                 when {
                     beepProgress < beepDuration   -> {beepProgress++}
                     beepNum < beepCount           -> {beepNum++; beepProgress = 1}
-                    else                          -> {letterNum++; beepNum = 1; beepProgress = 1}
+                    else                          -> {letterNum++; beepNum = 1; beepProgress = 1; viewModel.sendingCharacter.value = viewModel.sendingCharacter.value?.plus(1) ?: 0}
                 }
             }
 

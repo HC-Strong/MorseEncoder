@@ -21,6 +21,7 @@ import com.example.morseencoder.R
 import com.example.morseencoder.SharedViewModel
 import com.example.morseencoder.databinding.FragmentSenderBinding
 import timber.log.Timber
+import kotlin.math.max
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,6 +85,10 @@ class SenderFragment : Fragment() {
         model.lightOn.observe(this, Observer { lightState ->
             if(lightState == true) {binding.senderLightView.setImageResource(R.drawable.light_on)} else {binding.senderLightView.setImageResource(R.drawable.light_off) }
         })
+        model.sendingCharacter.observe(this, Observer { curChar ->
+            setHighlightedText(curChar)
+        })
+        model.sendingCharacter.value = 0
 
         // create flashlight handler for use sending message
         flashlightHandler = FlashlightHandler(context, model)
@@ -94,19 +99,26 @@ class SenderFragment : Fragment() {
         secretMessage = model.curSecretMessage.value ?: secretMessage
         Timber.i("SecretMessage is $secretMessage and the text I'm trying to modify is ${binding.senderMessageDisplay.text}")
 
+        return binding.root
+    }
 
-        // Set text span to be colored red to display currently sending character
+    // Set text span to be colored red to display currently sending character
+    fun setHighlightedText(position: Int) {
+
+        val redPos = if(position < secretMessage.length) {position} else {secretMessage.length}
+
+        val whitePos = if(position < secretMessage.length) { max(position-1, 0) } else {    secretMessage.length}
+
         val spannableString = SpannableString(binding.senderMessageDisplay.text)
-        Timber.i("Spannable Text is now $spannableString")
-        val redTextSpan = ForegroundColorSpan(resources.getColor(R.color.colorAccent)) //TODO try to use the non-depricated version that includes the theme
 
-        spannableString.setSpan(redTextSpan, 1, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        val whiteTextSpan = ForegroundColorSpan(resources.getColor(R.color.defaultText)) //TODO try to use the non-depricated version that includes the theme for this and the white span below
+        val redTextSpan = ForegroundColorSpan(resources.getColor(R.color.colorAccent))
+
+        spannableString.setSpan(whiteTextSpan, whitePos, whitePos+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(redTextSpan, redPos, redPos+1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
 
         binding.senderMessageDisplay.text = spannableString
-
-
-
-        return binding.root
     }
 
     // TODO: Rename method, update argument and hook method into UI event

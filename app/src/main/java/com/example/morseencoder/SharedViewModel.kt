@@ -19,6 +19,5 @@ class SharedViewModel: ViewModel() {
 
     init {
         lightOn.value = false
-        sendingCharacter.value = 1
     }
 }

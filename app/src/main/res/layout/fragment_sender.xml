@@ -71,6 +71,7 @@
                     android:paddingVertical="8dp"
                     android:singleLine="false"
                     android:textAlignment="viewStart"
+                    android:textColor="@color/dimmedText"
                     tools:text="Hello, this is your secret message" />
             </LinearLayout>
 
