@@ -4,6 +4,9 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +37,7 @@ private const val ARG_PARAM2 = "param2"
  */
 class SenderFragment : Fragment() {
 
-    private var secretMessage = "hi" // TODO: get actual msg via intent extra or whatever works with frags
+    private var secretMessage = "hi" // TODO: can I get rid of this?
     private lateinit var flashlightHandler: FlashlightHandler
     private val morseCodeHandler = MorseCodeHandler()
 
@@ -52,17 +55,6 @@ class SenderFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
-
-        model = activity?.run {
-            ViewModelProviders.of(this)[SharedViewModel::class.java] //Note that "this" returns the activity, not the fragment. All fragments use same activity, so will get the same viewmodel
-        } ?: throw Exception("Invalid Activity")
-
-        // Set up observation relationships with LiveData
-        model.lightOn.observe(this, Observer { lightState ->
-            if(lightState == true) {binding.senderLightView.setImageResource(R.drawable.light_on)} else {binding.senderLightView.setImageResource(R.drawable.light_off) }
-        })
-
-        flashlightHandler = FlashlightHandler(context, model)
     }
 
     private fun CountDownTimer.stopTransmission() {
@@ -83,7 +75,36 @@ class SenderFragment : Fragment() {
             flashlightHandler.timer.stopTransmission()
             Timber.i("transmission is being cancelled")
         }
+
+        model = activity?.run {
+            ViewModelProviders.of(this)[SharedViewModel::class.java] //Note that "this" returns the activity, not the fragment. All fragments use same activity, so will get the same viewmodel
+        } ?: throw Exception("Invalid Activity")
+
+        // Set up observation relationships with LiveData
+        model.lightOn.observe(this, Observer { lightState ->
+            if(lightState == true) {binding.senderLightView.setImageResource(R.drawable.light_on)} else {binding.senderLightView.setImageResource(R.drawable.light_off) }
+        })
+
+        // create flashlight handler for use sending message
+        flashlightHandler = FlashlightHandler(context, model)
+
+
+        // TODO: think about whether it's worthwhile to have secret message as a local var, as livedata and as the text string
+        binding.senderMessageDisplay.text = model.curSecretMessage.value.toString()
         secretMessage = model.curSecretMessage.value ?: secretMessage
+        Timber.i("SecretMessage is $secretMessage and the text I'm trying to modify is ${binding.senderMessageDisplay.text}")
+
+
+        // Set text span to be colored red to display currently sending character
+        val spannableString = SpannableString(binding.senderMessageDisplay.text)
+        Timber.i("Spannable Text is now $spannableString")
+        val redTextSpan = ForegroundColorSpan(resources.getColor(R.color.colorAccent)) //TODO try to use the non-depricated version that includes the theme
+
+        spannableString.setSpan(redTextSpan, 1, 4, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        binding.senderMessageDisplay.text = spannableString
+
+
 
         return binding.root
     }
