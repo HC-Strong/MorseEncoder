@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
@@ -64,6 +65,19 @@ class EncoderFragment : Fragment() {
         binding.sendMsgBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_encoderFragment_to_senderFragment)
             Timber.i("send message button clicked")
+        }
+
+        binding.encoderModeSelection.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Timber.i("the encoder mode is set to nothing. this should not be the case")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>,
+                                        view: View, position: Int, id: Long) {
+                val selection = binding.encoderModeSelection.selectedItem.toString()
+                Timber.i("Encoder Mode changed to $selection")
+            }
         }
 
         // save text to viewModel after it's edited   // TODO: I'm not using the observer pattern here so maybe I need to rethink
