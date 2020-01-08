@@ -13,11 +13,14 @@ import android.widget.AdapterView
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+//import com.example.morseencoder.EncoderModeNames
 import com.example.morseencoder.R
 import com.example.morseencoder.SharedViewModel
 import com.example.morseencoder.databinding.FragmentEncoderBinding
+import com.example.morseencoder.visibleStates
 import kotlinx.android.synthetic.main.fragment_encoder.*
 import timber.log.Timber
+import java.lang.Integer.max
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -62,6 +65,11 @@ class EncoderFragment : Fragment() {
         // then return the root of the binding as the view
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_encoder, container, false)
 
+        binding.lifecycleOwner = this
+
+        binding.sharedViewModel = model
+        // TODO doing this allows me to cut out some onclick listener code which I haven't yet done (see my udacity L5 notes)
+
         binding.sendMsgBtn.setOnClickListener {view : View ->
             view.findNavController().navigate(R.id.action_encoderFragment_to_senderFragment)
             Timber.i("send message button clicked")
@@ -76,7 +84,9 @@ class EncoderFragment : Fragment() {
             override fun onItemSelected(parent: AdapterView<*>,
                                         view: View, position: Int, id: Long) {
                 val selection = binding.encoderModeSelection.selectedItem.toString()
-                Timber.i("Encoder Mode changed to $selection")
+                val selectionInt = model.getVisStateFromName(selection)
+                model.encoderMode.value = selectionInt
+                Timber.i("Encoder Mode changed to ${model.encoderMode}. Id is ${model.encoderMode.value.toString()}")
             }
         }
 
